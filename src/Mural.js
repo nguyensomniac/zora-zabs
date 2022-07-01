@@ -1,5 +1,5 @@
 import React from "react";
-import html2canvas from "html2canvas";
+import html2canvas from "html2canvas-add-mix-blend-mode";
 
 export default function Mural({ file }) {
   const [src, setSrc] = React.useState("");
@@ -34,11 +34,15 @@ export default function Mural({ file }) {
   }, [file, setSrc]);
 
   return (
-    <div>
+    <div className="mural">
       <div
         ref={canvasRef}
         style={{
-          position: "relative"
+          position: "relative",
+          width: 'min-content',
+          height: 'min-content',
+          background: 'white',
+          display: 'flex'
         }}
       >
         <img
@@ -64,7 +68,7 @@ export default function Mural({ file }) {
           }}
         />
       </div>
-      <div onClick={downloadCanvas}>Download</div>
+      <div className="btn" onClick={downloadCanvas}>Download</div>
     </div>
   );
 }
