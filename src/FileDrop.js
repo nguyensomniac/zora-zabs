@@ -42,6 +42,7 @@ export default function FileDrop(props) {
       className={classNames("fileDrop", isDragging && "fileDropActive")}
     >
       <div
+        className={'dropSplash'}
         style={{
           overflow: "hidden",
           height: "min-content",
@@ -54,6 +55,7 @@ export default function FileDrop(props) {
         }}
       >
         <img
+          className={'muralDrop'}
           style={{
             width: "400px",
             height: "auto",
@@ -62,7 +64,7 @@ export default function FileDrop(props) {
           src={"./mural.png"}
         />
       </div>
-      <div style={{zIndex: 1}}>
+      <div style={{zIndex: 1, pointerEvents: 'none'}}>
         <svg
           width="72"
           height="72"
@@ -86,14 +88,16 @@ export default function FileDrop(props) {
           opacity: 1,
           zIndex: 1,
           color: "white",
+          pointerEvents: 'none'
         }}
       >
-        Drag and drop file here
+        Turn on, tune in, drop image
       </span>
       <span
         style={{
           color: "white",
           opacity: 0.75,
+          pointerEvents: 'none'
         }}
       >
         PNG & JPG accepted
