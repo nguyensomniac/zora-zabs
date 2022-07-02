@@ -5,7 +5,7 @@ import FileDrop from "./FileDrop";
 
 export default function App() {
   const [file, setFile] = React.useState(undefined);
-  const resetFile = () => {
+  function resetFile() {
     setFile(undefined)
   }
   return (
@@ -17,9 +17,7 @@ export default function App() {
       {file && <Mural file={file} onReset={resetFile} />}
       {!file && (
         <FileDrop
-          onDrop={(file) => {
-            setFile(file);
-          }}
+          onDrop={setFile}
         />
       )}
     </div>

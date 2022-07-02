@@ -1,7 +1,8 @@
 import React from "react";
 import html2canvas from "html2canvas-add-mix-blend-mode";
+import RainbowButton from "./components/RainbowButton";
 
-export default function Mural({ file, onReset }) {
+function Mural({ file, onReset }) {
   const [src, setSrc] = React.useState("");
   const canvasRef = React.useRef(null);
   const downloadCanvas = async () => {
@@ -73,9 +74,11 @@ export default function Mural({ file, onReset }) {
         flexDirection: 'row', gap: '8px',
         paddingTop: '16px'
       }}>
-        <div className="btn" onClick={downloadCanvas}>Download</div>
+        <RainbowButton onClick={downloadCanvas}>Download</RainbowButton>
         <div className="btn btn-secondary" onClick={onReset}>Try another</div>
       </div>
     </div>
   );
 }
+
+export default React.memo(Mural)

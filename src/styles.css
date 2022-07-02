@@ -37,7 +37,6 @@ body {
   flex: 1 0 auto;
   border-radius: 999px;
   transform: all 400ms ease;
-  border: 2px solid transparent;
   font-weight: 600;
   display: flex;
   justify-content: center;
