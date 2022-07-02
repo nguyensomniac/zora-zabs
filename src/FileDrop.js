@@ -59,7 +59,7 @@ export default function FileDrop(props) {
           className={'muralDrop'}
           style={{
             width: "400px",
-            maxWidth: '95%',
+            maxWidth: '95vw',
             height: "auto",
             filter: "blur(10px)",
           }}

@@ -51,7 +51,7 @@ function Mural({ file, onReset }) {
         height: 'min-content',
         background: 'white',
         width: "400px",
-        maxWidth: '95%',
+        maxWidth: '95vw',
             height: "auto"
       }} />}
       <div
