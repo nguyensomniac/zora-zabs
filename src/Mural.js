@@ -4,17 +4,26 @@ import RainbowButton from "./components/RainbowButton";
 
 function Mural({ file, onReset }) {
   const [src, setSrc] = React.useState("");
+  const [load1, setLoad1] = React.useState(false);
+  const [load2, setLoad2] = React.useState(false);
+  const [blob, setBlob] = React.useState(null)
   const canvasRef = React.useRef(null);
-  const downloadCanvas = async () => {
-    const canvas = await html2canvas(canvasRef.current, { useCORS: true });
-    const image = canvas.toDataURL("image/png", 1.0);
-    downloadImage(image, "zimage.png");
-  };
+  React.useEffect(() => {
+    const downloadCanvas = async () => {
+      const canvas = await html2canvas(canvasRef.current, { useCORS: true });
+      const image = canvas.toDataURL("image/png", 1.0);
+      setBlob(image);
+    };
 
-  const downloadImage = (blob, fileName) => {
+    if (load1 && load2) {
+      downloadCanvas()
+    }
+  }, [load1, load2])
+
+  const downloadImage = () => {
     const fakeLink = window.document.createElement("a");
     fakeLink.style = "display:none;";
-    fakeLink.download = fileName;
+    fakeLink.download = 'zimage.png';
 
     fakeLink.href = blob;
 
@@ -36,6 +45,15 @@ function Mural({ file, onReset }) {
 
   return (
     <div className="mural">
+      {blob && <img src={blob} style={{
+        position: "relative",
+        width: 'min-content',
+        height: 'min-content',
+        background: 'white',
+        width: "400px",
+        maxWidth: '100%',
+            height: "auto"
+      }} />}
       <div
         ref={canvasRef}
         style={{
@@ -43,11 +61,12 @@ function Mural({ file, onReset }) {
           width: 'min-content',
           height: 'min-content',
           background: 'white',
-          display: 'flex'
+          display: blob ? 'none' : 'flex'
         }}
       >
         <img
           src="mural.png"
+          onLoad={()=> setLoad1(true)}
           crossOrigin="Anonymous"
           style={{
             width: "400px",
@@ -56,6 +75,7 @@ function Mural({ file, onReset }) {
         />
         <img
           src={src}
+          onLoad={()=> setLoad2(true)}
           crossOrigin="Anonymous"
           style={{
             width: "35px",
@@ -69,14 +89,17 @@ function Mural({ file, onReset }) {
           }}
         />
       </div>
+      {
+        blob &&
       <div style={{
         display: 'flex',
         flexDirection: 'row', gap: '8px',
         paddingTop: '16px'
       }}>
-        <RainbowButton onClick={downloadCanvas}>Download</RainbowButton>
+        <RainbowButton onClick={downloadImage}>Download</RainbowButton>
         <div className="btn btn-secondary" onClick={onReset}>Try another</div>
       </div>
+      }
     </div>
   );
 }
