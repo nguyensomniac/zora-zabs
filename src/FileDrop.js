@@ -51,13 +51,15 @@ export default function FileDrop(props) {
           position: "absolute",
           top: "50%",
           left: "50%",
-          background: 'white'
+          background: 'white',
+          width: 'auto'
         }}
       >
         <img
           className={'muralDrop'}
           style={{
             width: "400px",
+            maxWidth: '95%',
             height: "auto",
             filter: "blur(10px)",
           }}
